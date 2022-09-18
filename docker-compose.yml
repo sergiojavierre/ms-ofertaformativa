@@ -1,0 +1,13 @@
+version: "3"
+services:
+  mariadb:
+    build: ./db
+    ports:
+      - "3306:3306"
+    volumes:
+      - maria-data:/data/db
+    env_file:
+      - backend/.env
+volumes:
+  maria-data:
+    driver: local
