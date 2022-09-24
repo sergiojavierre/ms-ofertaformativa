@@ -3,6 +3,7 @@ import CiclosRepository from '../../domain/ciclos.repository'
 
 //mysql
 import {executeQuery} from '../../../context/mysql.connector'
+import Modulo from '../../domain/Modulo'
 
 class CiclosRepositoryMySQL implements CiclosRepository{
     
@@ -15,9 +16,24 @@ class CiclosRepositoryMySQL implements CiclosRepository{
             return ciclos
         }
         catch (error) {
-            console.log(error);
-            
-            return [new Ciclo('1', '3')] 
+            console.error(error);
+            return [] 
+        }
+    }
+
+    async findModulos(ciclo: Ciclo): Promise<Modulo[]>{
+        const sql = `select * from modulos where ciclo = '${ciclo.codigo}'`
+        console.log(sql);
+        
+        try {
+            const modulosMySQL : any[] = await executeQuery(sql)           
+            const modulos : Modulo[]= []
+            modulosMySQL.forEach((modulo) => modulos.push(new Modulo(modulo.codigo, modulo.ciclo, modulo.nombre, modulo.horas, modulo.curso)))
+            return modulos
+        }
+        catch (error) {
+            console.error(error)
+            return []
         }
     }
 }

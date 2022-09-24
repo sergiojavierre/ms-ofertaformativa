@@ -5,7 +5,6 @@ dotenv.config()
 
 let pool: Pool;
 export const init = () => {
-  console.log(process.env);
   
   try {
     pool = createPool({

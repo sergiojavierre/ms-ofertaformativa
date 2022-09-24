@@ -1,11 +1,15 @@
 class Ciclo{
 
-    private codigo: String
+    private _codigo: String
     private nombre: String
 
-    constructor(codigo: String, nombre: String) {
-        this.codigo = codigo
-        this.nombre = nombre
+    constructor(codigo: String, nombre?: String) {
+        this._codigo = codigo
+        this.nombre = nombre ||""
+    }
+
+    get codigo(): String {
+        return this._codigo
     }
 }
 
