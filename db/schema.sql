@@ -1,24 +1,23 @@
 
-CREATE TABLE `ciclos` (
-  `codigo` varchar(6) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  primary key (codigo)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE ciclos (
+  codigo varchar(6) primary key,
+  nombre varchar(255)
+);
 
 
-CREATE TABLE `modulos` (
-  `codigo` varchar(6) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ciclo` varchar(6) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `horas` smallint(4) UNSIGNED NOT NULL,
-  `curso` enum('1','2') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  primary key (codigo),
+CREATE TABLE modulos (
+  codigo varchar(6),
+  ciclo varchar(6) not null,
+  nombre varchar(255),
+  horas smallint(4),
+  curso enum('1','2'),
+  primary key (codigo,ciclo),
   foreign key (ciclo) references ciclos(codigo)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+);
 
 
 INSERT INTO `ciclos` (`codigo`, `nombre`) VALUES
-('C0M201','Actividades comerciales'),
+('COM201','Actividades comerciales'),
 ('ELE202','Instalaciones eléctricas y automáticas'),
 ('IMA201','Mantenimiento electromecánico'),
 ('QUI201','Operaciones de laboratorio'),
@@ -33,10 +32,6 @@ INSERT INTO `ciclos` (`codigo`, `nombre`) VALUES
 ('IMA302','Mecatrónica industrial'),
 ('QUI301','Laboratorio de análisis y de control de calidad');
 
---INSERT INTO `modulos` (`codigo`,`ciclo`, `nombre`, `horas`, `curso`) VALUES
---('','', '', , ''),
-
---COM201
 INSERT INTO `modulos` (`codigo`,`ciclo`, `nombre`, `horas`, `curso`) VALUES
 ('1226','COM201', 'Marketing en la actividad comercial',160 , '1'),
 ('1229','COM201', 'Gestión de compras', 96, '1'),
@@ -51,7 +46,6 @@ INSERT INTO `modulos` (`codigo`,`ciclo`, `nombre`, `horas`, `curso`) VALUES
 ('1234','COM201', 'Servicios de atención comercial', 84, '2'),
 ('1235','COM201', 'Comercio electrónico', 126, '2'),
 ('1237','COM201', 'Formación en centros de trabajo', 410, '2');
---ELE202
 INSERT INTO `modulos` (`codigo`,`ciclo`, `nombre`, `horas`, `curso`) VALUES
 ('0232','ELE202', 'Automatismos industriales.', 256, '1'),
 ('0234','ELE202', 'Electrotecnia.', 224, '1'),
@@ -65,7 +59,6 @@ INSERT INTO `modulos` (`codigo`,`ciclo`, `nombre`, `horas`, `curso`) VALUES
 ('0240','ELE202', 'Máquinas eléctricas.', 105, '2'),
 ('0242','ELE202', 'Empresa e iniciativa emprendedora.', 63, '2'),
 ('0243','ELE202', 'Formación en centros de trabajo.', 410, '2');
---IMA201
 INSERT INTO `modulos` (`codigo`,`ciclo`, `nombre`, `horas`, `curso`) VALUES
 ('0949','IMA201', 'Técnicas de Fabricación.', 280, '1'),
 ('0950','IMA201', 'Técnicas de Unión y Montaje.', 130, '1'),
@@ -77,7 +70,6 @@ INSERT INTO `modulos` (`codigo`,`ciclo`, `nombre`, `horas`, `curso`) VALUES
 ('0955','IMA201', 'Montaje y Mantenimiento de Líneas Automatizadas.', 190, '2'),
 ('0957','IMA201', 'Empresa e Iniciativa Emprendedora.', 63, '2'),
 ('0958','IMA201', 'Formación en Centros de Trabajo.', 410, '2');
---QUI201
 INSERT INTO `modulos` (`codigo`,`ciclo`, `nombre`, `horas`, `curso`) VALUES
 ('1249','QUI201', 'Química aplicada.', 256, '1'),
 ('1250','QUI201', 'Muestreo y operaciones unitarias de laboratorio.', 192, '1'),
@@ -91,7 +83,6 @@ INSERT INTO `modulos` (`codigo`,`ciclo`, `nombre`, `horas`, `curso`) VALUES
 ('1256','QUI201', 'Ensayos de materiales.', 105, '2'),
 ('1257','QUI201', 'Almacenamiento y distribución en el laboratorio.', 42, '2'),
 ('1259','QUI201', 'Empresa e iniciativa emprendedora.', 63, '2');
---AFD301
 INSERT INTO `modulos` (`codigo`,`ciclo`, `nombre`, `horas`, `curso`) VALUES
 ('1124','AFD301', 'Dinamización grupal.', 128, '1'),
 ('1136','AFD301', 'Valoración de la condición física e intervención en accidentes.', 192, '1'),
@@ -107,9 +98,8 @@ INSERT INTO `modulos` (`codigo`,`ciclo`, `nombre`, `horas`, `curso`) VALUES
 ('1142','AFD301', 'Actividades físico-deportivas para la inclusión social', 84, '2'),
 ('1146','AFD301', 'Empresa e iniciativa emprendedora', 63, '2'),
 ('A029','AFD301', 'Lengua extranjera profesional: inglés 2', 42, '2'),
-('1144','AFD301', 'Proyecto de enseñanza y animación sociodeportiva', 40, ''),
+('1144','AFD301', 'Proyecto de enseñanza y animación sociodeportiva', 40, '2'),
 ('1147','AFD301', 'Formación en centros de trabajo', 370, '2');
---AFD302
 INSERT INTO `modulos` (`codigo`,`ciclo`, `nombre`, `horas`, `curso`) VALUES
 ('1136','AFD302', 'Valoración de la condición física e intervención en accidentes', 192, '1'),
 ('1149','AFD302', 'Actividades básicas de acondicionamiento físico con soporte musical', 192, '1'),
@@ -133,7 +123,7 @@ INSERT INTO `modulos` (`codigo`,`ciclo`, `nombre`, `horas`, `curso`) VALUES
 ('0552','ELE304', 'Sistemas informáticos y redes locales', 160, '1'),
 ('0553','ELE304', 'Técnicas y procesos en infraestructuras de telecomunicaciones', 128, '1'),
 ('0601','ELE304', 'Gestión de proyectos de instalaciones de telecomunicaciones', 64, '1'),
-('0713','ELE304', 'Sistemas de telefonía fija y móvil', 160, ''),
+('0713','ELE304', 'Sistemas de telefonía fija y móvil', 160, '1'),
 ('A046','ELE304', 'Lengua Extranjera entorno profesional Inglés I', 64, '1'),
 ('0559','ELE304', 'Formación y orientación laboral', 42, '1'),
 ('0554','ELE304', 'Sistemas de producción audiovisual', 168, '2'),
@@ -144,14 +134,13 @@ INSERT INTO `modulos` (`codigo`,`ciclo`, `nombre`, `horas`, `curso`) VALUES
 ('0560','ELE304', 'Empresa e iniciativa emprendedora', 63, '2'),
 ('0558','ELE304', 'Proyecto de Sistemas de Telecomunicaciones e Informáticos', 40, '2'),
 ('0561','ELE304', 'Formación en centros de trabajo', 370, '2');
---ENA301
 INSERT INTO `modulos` (`codigo`,`ciclo`, `nombre`, `horas`, `curso`) VALUES
 ('0121','ENA301', 'Equipos e instalaciones térmicas', 256, '1'),
 ('0122','ENA301', 'Procesos de montaje de instalaciones', 256, '1'),
 ('0123','ENA301', 'Representación gráfica de instalaciones', 96, '1'),
 ('0351','ENA301', 'Gestión eficiente del agua en edificación', 64, '1'),
-('0352','ENA301', 'Configuración de instalaciones solares térmicas', 128, '1'),
-('0352','ENA301', 'Configuración de instalaciones solares térmicas', 84, '2'),
+('0352-1','ENA301', 'Configuración de instalaciones solares térmicas', 128, '1'),
+('0352-2','ENA301', 'Configuración de instalaciones solares térmicas', 84, '2'),
 ('0356','ENA301', 'Formación y orientación laboral', 96, '1'),
 ('A028','ENA301', 'Lengua Extranjera entorno profesional Inglés I', 64, '1'),
 ('0350','ENA301', 'Certificación energética de edificios', 189, '2'),
@@ -162,7 +151,6 @@ INSERT INTO `modulos` (`codigo`,`ciclo`, `nombre`, `horas`, `curso`) VALUES
 ('A029','ENA301', 'Lengua Extranjera entorno profesional Inglés II', 42, '2'),
 ('0355','ENA301', 'Proyecto de eficiencia energética y energía solar térmica', 40, '2'),
 ('0358','ENA301', 'Formación en centros de trabajo', 370, '2');
---ENA302
 INSERT INTO `modulos` (`codigo`,`ciclo`, `nombre`, `horas`, `curso`) VALUES
 ('0668','ENA302', 'Sistemas eléctricos en centrales', 192, '1'),
 ('0670','ENA302', 'Telecontrol y automatismos', 192, '1'),
@@ -179,7 +167,6 @@ INSERT INTO `modulos` (`codigo`,`ciclo`, `nombre`, `horas`, `curso`) VALUES
 ('A096','ENA302', 'Lengua Extranjera entorno profesional_ Inglés II', 42, '2'),
 ('0686','ENA302', 'Proyecto de energías renovables', 40, '2'),
 ('0689','ENA302', 'Formación en centros de trabajo', 370, '2');
---IFC303
 INSERT INTO `modulos` (`codigo`,`ciclo`, `nombre`, `horas`, `curso`) VALUES
 ('0373','IFC303', 'Lenguajes de marcas y sistemas de gestión de información', 96, '1'),
 ('0483','IFC303', 'Sistemas informáticos', 160, '1'),
@@ -196,7 +183,6 @@ INSERT INTO `modulos` (`codigo`,`ciclo`, `nombre`, `horas`, `curso`) VALUES
 ('0619','IFC303', 'Formación en centros de trabajo', 370, '2'),
 ('A052','IFC303', 'Lengua Extranjera profesional: Inglés 1', 64, '1'),
 ('A053','IFC303', 'Lengua Extranjera profesional: Inglés 2', 42, '2');
---IMA301
 INSERT INTO `modulos` (`codigo`,`ciclo`, `nombre`, `horas`, `curso`) VALUES
 ('0120','IMA301', 'Sistemas eléctricos y automáticos', 192, '1'),
 ('0121','IMA301', 'Equipos e instalaciones térmicas', 252, '1'),
@@ -213,7 +199,6 @@ INSERT INTO `modulos` (`codigo`,`ciclo`, `nombre`, `horas`, `curso`) VALUES
 ('A025','IMA301', 'Lengua Extranjera entorno profesional_ Inglés II', 42, '2'),
 ('0137','IMA301', 'Proyecto de mantenimiento de instalaciones térmicas y de fluidos', 40, '2'),
 ('0140','IMA301', 'Formación en centros de trabajo', 370, '2');
---IMA302
 INSERT INTO `modulos` (`codigo`,`ciclo`, `nombre`, `horas`, `curso`) VALUES
 ('0936','IMA302', 'Sistemas hidraúlico y neumático', 160, '1'),
 ('0937','IMA302', 'Sistemas eléctrico y electrónico', 160, '1'),
@@ -231,7 +216,6 @@ INSERT INTO `modulos` (`codigo`,`ciclo`, `nombre`, `horas`, `curso`) VALUES
 ('0947','IMA302', 'Empresa e iniciativa emprendedora', 63, '2'),
 ('0945','IMA302', 'Proyecto de mecatrónica industrial', 63, '2'),
 ('0948','IMA302', 'Formación en centros de trabajo', 370, '2');
---QUI301
 INSERT INTO `modulos` (`codigo`,`ciclo`, `nombre`, `horas`, `curso`) VALUES
 ('0065','QUI301', 'Muestreo y preparación de la muestra', 160, '1'),
 ('0066','QUI301', 'Análisis químicos', 320, '1'),

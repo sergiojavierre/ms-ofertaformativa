@@ -22,9 +22,7 @@ class CiclosRepositoryMySQL implements CiclosRepository{
     }
 
     async findModulos(ciclo: Ciclo): Promise<Modulo[]>{
-        const sql = `select * from modulos where ciclo = '${ciclo.codigo}'`
-        console.log(sql);
-        
+        const sql = `select * from modulos where ciclo = '${ciclo.codigo}'`        
         try {
             const modulosMySQL : any[] = await executeQuery(sql)           
             const modulos : Modulo[]= []
