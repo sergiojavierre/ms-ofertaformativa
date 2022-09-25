@@ -1,7 +1,8 @@
 
 CREATE TABLE ciclos (
   codigo varchar(6) primary key,
-  nombre varchar(255)
+  nombre varchar(255),
+  nivel enum('medio','superior')
 );
 
 
@@ -16,21 +17,21 @@ CREATE TABLE modulos (
 );
 
 
-INSERT INTO `ciclos` (`codigo`, `nombre`) VALUES
-('COM201','Actividades comerciales'),
-('ELE202','Instalaciones eléctricas y automáticas'),
-('IMA201','Mantenimiento electromecánico'),
-('QUI201','Operaciones de laboratorio'),
-('AFD301','Enseñanza y animación sociodeportiva'),
-('AFD302','Acondicionamiento físico'),
-('ELE304','Sistemas de teleconomunicaciones e informáticos'),
-('ENA301','Eficiencia energética y energía solar térmica'),
-('ENA302','Energías renovables'),
-('EOC301','Proyecto de edificación'),
-('IFC303','Desarrollo de Aplicaciones Web'),
-('IMA301','Mantenimiento de instalaciones térmicas y de fluidos'),
-('IMA302','Mecatrónica industrial'),
-('QUI301','Laboratorio de análisis y de control de calidad');
+INSERT INTO `ciclos` (`codigo`, `nombre`, `nivel`) VALUES
+('COM201','Actividades comerciales','medio'),
+('ELE202','Instalaciones eléctricas y automáticas','medio'),
+('IMA201','Mantenimiento electromecánico','medio'),
+('QUI201','Operaciones de laboratorio','medio'),
+('AFD301','Enseñanza y animación sociodeportiva','superior'),
+('AFD302','Acondicionamiento físico','superior'),
+('ELE304','Sistemas de teleconomunicaciones e informáticos','superior'),
+('ENA301','Eficiencia energética y energía solar térmica','superior'),
+('ENA302','Energías renovables','superior'),
+('EOC301','Proyecto de edificación','superior'),
+('IFC303','Desarrollo de Aplicaciones Web','superior'),
+('IMA301','Mantenimiento de instalaciones térmicas y de fluidos','superior'),
+('IMA302','Mecatrónica industrial','superior'),
+('QUI301','Laboratorio de análisis y de control de calidad','superior');
 
 INSERT INTO `modulos` (`codigo`,`ciclo`, `nombre`, `horas`, `curso`) VALUES
 ('1226','COM201', 'Marketing en la actividad comercial',160 , '1'),

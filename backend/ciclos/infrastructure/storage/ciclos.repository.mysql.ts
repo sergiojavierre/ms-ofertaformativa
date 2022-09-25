@@ -8,7 +8,21 @@ import Modulo from '../../domain/Modulo'
 class CiclosRepositoryMySQL implements CiclosRepository{
     
     async findAll(): Promise<Ciclo[]>{
-        const sql = `select * from ciclos`
+        const sql = `select * from ciclos order by codigo`
+        try {
+            const ciclosMySQL : any[] = await executeQuery(sql)           
+            const ciclos : Ciclo[]= []
+            ciclosMySQL.forEach((ciclo) => ciclos.push(new Ciclo(ciclo.codigo, ciclo.nombre)))
+            return ciclos
+        }
+        catch (error) {
+            console.error(error);
+            return [] 
+        }
+    }
+
+    async filter(nivel: String): Promise<Ciclo[]>{
+        const sql = `select * from ciclos where nivel = '${nivel}' order by codigo`
         try {
             const ciclosMySQL : any[] = await executeQuery(sql)           
             const ciclos : Ciclo[]= []
@@ -22,7 +36,7 @@ class CiclosRepositoryMySQL implements CiclosRepository{
     }
 
     async findModulos(ciclo: Ciclo): Promise<Modulo[]>{
-        const sql = `select * from modulos where ciclo = '${ciclo.codigo}'`        
+        const sql = `select * from modulos where ciclo = '${ciclo.codigo}' order by curso, nombre`        
         try {
             const modulosMySQL : any[] = await executeQuery(sql)           
             const modulos : Modulo[]= []
